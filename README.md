@@ -1,21 +1,13 @@
-# 🌐 Debodebe Public Web (GitHub Pages)
+# 💶 Debodebe
 
-Este repositorio contiene la configuración pública de **Android App Links** y la página receptora de enlaces compartidos para la app **Debodebe**.
+**Debodebe** es una aplicación moderna para Android diseñada para gestionar deudas, gastos compartidos y balances de forma rápida, clara y privada.
 
-## 📌 Configuración en GitHub:
+## 🌟 Características principales
 
-1. Crea un repositorio público en tu cuenta de GitHub con el nombre `public-debodebe-app` (o `debodebe-app`).
-2. Sube estos archivos a tu repositorio público:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit for GitHub Pages App Links"
-   git remote add origin git@github.com:mafdes/public-debodebe-app.git
-   git push -u origin main
-   ```
-3. Ve a tu repositorio en GitHub -> **Settings** -> **Pages**:
-   - **Source:** Deploy from a branch
-   - **Branch:** `main` / `/ (root)`
-   - Haz clic en **Save**.
+- 📊 **Cuentas claras:** Visualización instantánea del balance entre lo que te deben y lo que debes.
+- 👥 **Gestión de contactos:** Asocia apuntes rápidamente a tus contactos.
+- 🔗 **Compartir e importar:** Comparte apuntes fácilmente con tus amigos para añadirlos a su app en un clic.
+- 🔐 **Privacidad:** Tus datos pertenecen a tu dispositivo.
 
-4. Actualiza la huella **SHA-256** en el archivo `.well-known/assetlinks.json` con la huella digital de tu clave release (o de Google Play Console).
+---
+© Debodebe App
