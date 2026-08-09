@@ -1,0 +1,22 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mafdes.debodebe",
+      "sha256_cert_fingerprints": [
+        "27:49:97:FE:EA:37:B5:52:2D:A1:4D:D0:00:BE:AC:BB:AF:F6:A3:40:71:70:29:F6:ED:CC:90:DF:40:BD:8E:92"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mafdes.debodebe.dev",
+      "sha256_cert_fingerprints": [
+        "27:49:97:FE:EA:37:B5:52:2D:A1:4D:D0:00:BE:AC:BB:AF:F6:A3:40:71:70:29:F6:ED:CC:90:DF:40:BD:8E:92"
+      ]
+    }
+  }
+]

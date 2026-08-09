@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debodebe - Compartir Deuda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #F8FAFC;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 32px 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        .app-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #FFFFFF;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #94A3B8;
+            margin-bottom: 24px;
+        }
+        .debt-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .debt-concept {
+            font-size: 16px;
+            font-weight: 600;
+            color: #E2E8F0;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .debt-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #10B981;
+        }
+        .debt-type {
+            font-size: 13px;
+            color: #94A3B8;
+            margin-top: 4px;
+        }
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(79, 70, 229, 0.4);
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #64748B;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="app-icon">💶</div>
+    <h1>Debodebe</h1>
+    <p class="subtitle">Gestión rápida de deudas y cuentas claras</p>
+
+    <div class="debt-card" id="debtCard">
+        <div class="debt-concept" id="debtConcept">🍕 Cenas / Deuda compartida</div>
+        <div class="debt-amount" id="debtAmount">-- €</div>
+        <div class="debt-type" id="debtType">Te han compartido un apunte para importar</div>
+    </div>
+
+    <a href="#" id="openAppBtn" class="btn">Abrir en Debodebe</a>
+
+    <p class="footer">Debodebe App • Android</p>
+</div>
+
+<script>
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const data = urlParams.get('data');
+
+        if (data) {
+            try {
+                // Decodificar Base64 seguro para URL
+                const jsonStr = decodeURIComponent(escape(atob(data.replace(/-/g, '+').replace(/_/g, '/'))));
+                const debt = JSON.parse(jsonStr);
+
+                if (debt.concept) {
+                    document.getElementById('debtConcept').textContent = (debt.emoji || '📌') + ' ' + debt.concept;
+                }
+                if (debt.amount) {
+                    document.getElementById('debtAmount').textContent = parseFloat(debt.amount).toFixed(2) + ' €';
+                }
+                if (debt.type) {
+                    document.getElementById('debtType').textContent = debt.type === 'OWES_ME' 
+                        ? 'Debes esta cantidad (se importará como debo)' 
+                        : 'Te deben esta cantidad (se importará como me deben)';
+                }
+            } catch (e) {
+                console.error("Error al decodificar la deuda:", e);
+            }
+        }
+
+        // Configurar el botón para abrir el intent nativo si se toca desde móvil
+        const openBtn = document.getElementById('openAppBtn');
+        openBtn.href = window.location.href;
+    })();
+</script>
+
+</body>
+</html>
