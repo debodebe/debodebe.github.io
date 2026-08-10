@@ -154,9 +154,13 @@
             }
         }
 
-        // Configurar el botón para abrir el intent nativo si se toca desde móvil
+        // Configurar el botón para abrir el esquema personalizado debodebe://import como fallback nativo
         const openBtn = document.getElementById('openAppBtn');
-        openBtn.href = window.location.href;
+        if (data) {
+            openBtn.href = "debodebe://import?data=" + encodeURIComponent(data);
+        } else {
+            openBtn.href = "https://play.google.com/store/apps/details?id=com.mafdes.debodebe";
+        }
     })();
 </script>
 
