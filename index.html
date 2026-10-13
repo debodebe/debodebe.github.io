@@ -181,6 +181,7 @@
         <div class="debt-concept" id="debtConcept">📌 Apunte cargado</div>
         <div class="debt-amount" id="debtAmount">-- €</div>
         <div class="debt-type" id="debtType">Apunte compartido para importar</div>
+        <div class="debt-date" id="debtDate" style="display:none; margin-top: 8px; font-size: 13px; color: #BCAAA4;"></div>
         <div class="sender-badge" id="senderBadge"></div>
     </div>
 
@@ -295,6 +296,22 @@
                 }
                 if (debt.senderName) {
                     document.getElementById('senderBadge').textContent = t.sharedBy + debt.senderName;
+                }
+                if (debt.date) {
+                    try {
+                        const d = new Date(debt.date);
+                        const dateLocale = currentLang === 'ca' ? 'ca-ES' : (currentLang === 'es' ? 'es-ES' : 'en-US');
+                        const formattedDate = d.toLocaleDateString(dateLocale, {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                        });
+                        const dateEl = document.getElementById('debtDate');
+                        dateEl.textContent = '📅 ' + formattedDate;
+                        dateEl.style.display = 'block';
+                    } catch (e) {
+                        console.error("Error formatting date:", e);
+                    }
                 }
             } catch (e) {
                 console.error("Error al decodificar la deuda:", e);
